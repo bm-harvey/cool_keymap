@@ -11,7 +11,7 @@
  * q and ; are on the num layer because tab, backspace, and enter are
     more important 
 
- * [0]                                                                    |  [3]                                                                    
+ * [BASE_LAYER]                                                           |  [SYMBOL_LAYER]                                                         
  * .-----------------------------.       .-----------------------------.  |  .-----------------------------.       .-----------------------------.  
  * | tab |  w  |  e  |  r  |  t  |       |  y  |  u  |  i  |  o  | bsp |  |  |  Q  |  %  |  ^  |  &  | esc |       | del |  ~  | pgup|  "  | bsp |  
  * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|  
@@ -24,7 +24,7 @@
  *             '─────────|  space  |   |   ctrl  |─────────'              |              '─────────|  space  |   |   ctrl  |─────────'              
  *                       '─────────'   '─────────'                        |                        '─────────'   '─────────'                        
  *                                                                        |                                                                         
- * [1]                                                                    | [4]                                                                     
+ * [SHIFTED_LAYER]                                                        | [MACRO_LAYER]                                                           
  * TAB means shift+tab and ENT meand shift+enter                          |                                                                         
  * .-----------------------------.       .-----------------------------.  |  .-----------------------------.       .-----------------------------.  
  * | TAB |  W  |  E  |  R  |  T  |       |  Y  |  U  |  I  |  O  | bsp |  |  |     | game|     |     |     |       | volu|zmout| scup| zmin|     |  
@@ -38,8 +38,8 @@
  *             '─────────|  space  |   |   ctrl  |─────────'              |              '─────────|  space  |   |         |─────────'              
  *                       '─────────'   '─────────'                        |                        '─────────'   '─────────'                        
  *                                                                        |                                                                         
- * [2]                                                                    |  [5]                                                                    
- * holding q opens a macro layer                                          |                                                                       
+ * [NUM_LAYER]                                                            |  [GAME_LAYER]                                                           
+ * holding q opens a macro layer                                          |                                                                         
  * .-----------------------------.       .-----------------------------.  |  .-----------------------------.       .-----------------------------.  
  * |q mac| sft | ctl | alt | win |       | del |  `  |  up |  '  | bsp |  |  | tab |  q  |  w  |  e  |  r  |       | volu|zmout| scup| zmin|     |  
  * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|  
@@ -52,15 +52,26 @@
  *             '─────────|  space  |   |   ctrl  |─────────'              |              '─────────|  space  |   |         |─────────'              
  *                       '─────────'   '─────────'                        |                        '─────────'   '─────────'                        
                                                                           |                                                                         
+ * [FXN_LAYER]                                                            |
+ * holding q opens a macro layer                                          |
+ * .-----------------------------.       .-----------------------------.  |
+ * |     |     |     | F11 | F12 |       |     |     |     |     |     |  |
+ * |-----------------------------|       |-----------------------------|  |
+ * |  F1 |  F2 |  F3 |  F4 |  F5 |       |     |     |     |     |     |  |
+ * |-----------------------------|       |-----------------------------|  |
+ * |  F6 |  F7 |  F8 |  F9 |  F0 |       |     |     |     |     |     |
+ * '-----------------------------'       '-----------------------------'  |
+ *             .─────────.                       .─────────.              |
+ *             |~~layer~~|─────────.   .─────────| *shift* |              |
+ *             '─────────|  space  |   |   ctrl  |─────────'              |
+ *                       '─────────'   '─────────'                        |
+                                                                          |
  */
 
 #include QMK_KEYBOARD_H
 
 
 char * layout_string = "test\n";
-
-
-
 
 // tap dance states
 typedef enum {
@@ -76,19 +87,25 @@ typedef struct {
     td_state_t state;
 } td_tap_t;
 
-td_state_t get_q_macro_state(tap_dance_state_t *state);
 
 // Tap dance keycodes ... use with TD()
 enum {
-    Q_MACRO
+    Q_MACRO,
+    SCLN_FXN
 };
 enum custom_keys {
   ARROW = SAFE_RANGE,
 };
 
 // For the q tap dance. Put it here so it can be used in any keymap
+td_state_t get_q_macro_state(tap_dance_state_t *state);
 void q_finished(tap_dance_state_t * state, void *user_data);
 void q_reset(tap_dance_state_t * state, void *user_data);
+
+
+td_state_t get_semicolon_fxn_state(tap_dance_state_t *state);
+void semicolon_finished(tap_dance_state_t * state, void *user_data);
+void semicolon_reset(tap_dance_state_t * state, void *user_data);
 
 enum layer_names {
   BASE_LAYER,
@@ -96,7 +113,8 @@ enum layer_names {
   NUM_LAYER,
   SYMBOL_LAYER,
   MACRO_LAYER,
-  GAME_LAYER
+  GAME_LAYER,
+  FXN_LAYER,
 };
 
 // #define COLEMACKDH
@@ -147,7 +165,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [NUM_LAYER] = LAYOUT(
     // -------------------------------------------------------+----------------------------------------------------------
      TD(Q_MACRO) , KC_LSFT , KC_LCTL , KC_LALT , KC_LGUI , /* | */ KC_DEL        , KC_GRV  , KC_UP      , KC_QUOT    , KC_BSPC        ,
-     KC_1        , KC_2    , KC_3    , KC_4    , KC_5    , /* | */ KC_BSLS       , KC_LEFT , KC_DOWN    , KC_RIGHT   , KC_SCLN        ,
+     KC_1        , KC_2    , KC_3    , KC_4    , KC_5    , /* | */ KC_BSLS       , KC_LEFT , KC_DOWN    , KC_RIGHT   , TD(SCLN_FXN) ,
      KC_6        , KC_7    , KC_8    , KC_9    , KC_0    , /* | */ LSFT(KC_MINS) , KC_SLSH , LSFT(KC_9) , LSFT(KC_0) , LSFT_T(KC_ENT) ,
     // -------------------------------------------------------+----------------------------------------------------------
                               QK_TRI_LAYER_LOWER, KC_SPC , /* | */ KC_LCTL , QK_TRI_LAYER_UPPER
@@ -179,7 +197,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // --------------------------------------+--------------------------------------------------------------
                         KC_ESC , KC_SPC , /* | */ KC_NO , TO(BASE_LAYER)
     // --------------------------------------+--------------------------------------------------------------
-  )
+  ),
+  [GAME_LAYER] = LAYOUT(
+    // ------------------------------------------+--------------------------------------------------------------
+    KC_NO , KC_NO , KC_NO , KC_F11 , KC_F12 , /* | */ KC_NO , KC_NO   , KC_NO , KC_NO , KC_NO   ,
+    KC_F1 , KC_F2 , KC_F3 , KC_F4  , KC_F5  , /* | */ KC_NO , KC_LALT , KC_NO , KC_NO , KC_NO   ,
+    KC_F6 , KC_F7 , KC_F8 , KC_F9  , KC_F10 , /* | */ KC_NO , KC_NO   , KC_NO , KC_NO , KC_NO   ,
+    // ------------------------------------------+--------------------------------------------------------------
+                              KC_NO , KC_NO , /* | */ KC_NO , TO(BASE_LAYER)
+    // ------------------------------------------+--------------------------------------------------------------
+  ),
 };
 
 // 
@@ -219,9 +246,40 @@ void q_reset(tap_dance_state_t * state, void* user_data) {
     }
     tap_state.state = TD_NONE;
 }
+td_state_t get_semicolon_fxn_state(tap_dance_state_t *state) {
+    if (state->count) {
+        // or-ing this condition with `state->interuptted` 
+        // makes it so that the tap behaviour is preffered for rolls 
+        if (!state->pressed) return TD_TAPPED; // prefer hold behavoir on interrupt
+        else return TD_HELD;
+    } else return TD_UNKNOWN;
+}
+
+void semicolon_finished(tap_dance_state_t *state, void* user_data) {
+    tap_state.state = get_semicolon_fxn_state(state);
+    switch (tap_state.state) {
+        case TD_TAPPED: 
+          for (int i = 0; i < state->count; ++i){
+            register_code(KC_SCLN); 
+            unregister_code(KC_SCLN); 
+          } break;
+        case TD_HELD: layer_on(FXN_LAYER); break;
+        default: break;
+    }
+}
+
+void semicolon_reset(tap_dance_state_t * state, void* user_data) {
+    switch (tap_state.state) {
+        case TD_TAPPED: unregister_code(KC_SCLN); break;
+        case TD_HELD: layer_off(FXN_LAYER); break;
+        default: break;
+    }
+    tap_state.state = TD_NONE;
+}
 
 tap_dance_action_t tap_dance_actions[] = {
-    [Q_MACRO] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, q_finished, q_reset)
+    [Q_MACRO] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, q_finished, q_reset),
+    [SCLN_FXN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, semicolon_finished, semicolon_reset)
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
