@@ -1,4 +1,5 @@
 /* 
+ * https://caksoylar.github.io/keymap-drawer?keymap_yaml=H4sIAAAAAAAC_7VWWU_bQBB-76-YNyfSUhLnIETqg68csD7iIwlQlHKEFgENTagoQvz3ztg71hqQQD0i7eTbb3dmZ76d2Lk-eVj9vOvD44-bq8XV8uF0dbI-78PFcr2-3Gxv7pfLWwG0dq02SusgzNLF5vb68m7R-tVZmE8fcG253vQ_AMgG2S04Si1bwEyAJyAWkB4X7IGATMBYQCjATiJH0ZaARIArYCBgqLiRgD0B-wKkgKjgtuAREzgU8A3TcFL5hCwodl6wlkx11inYYTZmdqq-bRUxUHNf8zKE8cKP-I-vnuEFacEng5zH3Cf7kMZjksqLQYYzDyXAakWetYDKchZFXkz1yaaSjgLVUL-6yGPWZgw8BjGDtH6s-RwwnTEYMwjrFcFzzuLFhIHLYMBgWDlgxPQeg30GkkFU8Thkes7AYTBlYFc8Aqb90iP0S-yGaalGUFb_Z3qb3KpubQK-5cShCs1-dNMi7wJ1jusha3zB7sgiBPipqGo0cW6YZFpk2mQ6hlr9jKE8Cu6GswB_FePhCCd4eOLIAAbzgKsxuuS3Q6ZHZpdMw-DfQCHOOEjqqgm31Xe-sFvXZ436_2jUlt6oE76PDoMugx0EXuLo4hVNFdPdR0MSsYiR5deqSbmtVnpIG1sGX_mE2sz4ZOgNYyeSGngU-h4FdVFbL3C5tVHbSns1OTmTQYtBu-w8Epcv44jUP-YMpB2XDRxrGHMY_V03tpWo1FNpWBtavlfsoYoNHuqIaSizIp7SZDYCJvLstb3sbMVxOHsWx89SL3eWuXVzG7_i_FoGuNuP4ilZiQ92P5in2ga8eFW2qsi2Eq4oL7ijvykm5cvi_RWWvaTdL5ZZvkveW2NxLfhawXcIpjv9ZxV2-y9FHDSbZMy39B3QNhNHC0cbR0fzKB5ML326uG8HRw_HLh3TeOsYnXxewfn65H5xtvp-cfmVCsE_Bwt8evQaiM9WN6crmplmObvHWfs3ZY05VE8IAAA%3D
  * Overview of the layout
  * \n just means enter
  * 
@@ -40,12 +41,13 @@
  *                                                                        |                                                                         
  * [NUM_LAYER]                                                            |  [GAME_LAYER]                                                           
  * holding q opens a macro layer                                          |                                                                         
+ * holding ; opens a fxn layer                                            |                                                                         
  * .-----------------------------.       .-----------------------------.  |  .-----------------------------.       .-----------------------------.  
  * |q mac| sft | ctl | alt | win |       | del |  `  |  up |  '  | bsp |  |  | tab |  q  |  w  |  e  |  r  |       | volu|zmout| scup| zmin|     |  
  * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|  
- * |  1  |  2  |  3  |  4  |  5  |       |  \  | lft |  dn | rht |  ;  |  |  | sft |  a  |  s  |  d  |  f  |       | mute|sclft| scdn|scrht|     |  
+ * |  1  |  2  |  3  |  4  |  5  |       |  \  | lft |  dn | rht |; fxn|  |  | sft |  a  |  s  |  d  |  f  |       | mute|sclft| scdn|scrht|     |  
  * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|  
- * |  6  |  7  |  8  |  9  |  0  |       |  _  |  /  |  (  |  )  |\n sh|  |  | ctl |  z  |  x  |  c  |  v  |       | vold| prev|pause| next|     |  
+ * |  6  |  7  |  8  |  9  |  0  |       |  _  |  /  |  (  |  )  |\n sh|  |  | ctl |  z  |  x  |  c  |  v  |       | vold| prev|pause| next|  ~  |  
  * '-----------------------------'       '-----------------------------'  |  '-----------------------------'       '-----------------------------'  
  *             .─────────.                       .─────────.              |              .─────────.                       .─────────.              
  *             |~~layer~~|─────────.   .─────────| *shift* |              |              |  escape |─────────.   .─────────|   base  |              
@@ -53,13 +55,12 @@
  *                       '─────────'   '─────────'                        |                        '─────────'   '─────────'                        
                                                                           |                                                                         
  * [FXN_LAYER]                                                            |
- * holding q opens a macro layer                                          |
  * .-----------------------------.       .-----------------------------.  |
  * |     |     |     | F11 | F12 |       |     |     |     |     |     |  |
  * |-----------------------------|       |-----------------------------|  |
- * |  F1 |  F2 |  F3 |  F4 |  F5 |       |     |     |     |     |     |  |
+ * |  F1 |  F2 |  F3 |  F4 |  F5 |       |     | alt |     |     |     |  |
  * |-----------------------------|       |-----------------------------|  |
- * |  F6 |  F7 |  F8 |  F9 |  F0 |       |     |     |     |     |     |
+ * |  F6 |  F7 |  F8 |  F9 |  F0 |       |     |     |     |     |     |  |
  * '-----------------------------'       '-----------------------------'  |
  *             .─────────.                       .─────────.              |
  *             |~~layer~~|─────────.   .─────────| *shift* |              |
@@ -192,13 +193,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [GAME_LAYER] = LAYOUT(
     // --------------------------------------+--------------------------------------------------------------
     KC_TAB  , KC_Q , KC_W , KC_E , KC_R , /* | */ KC_VOLU , LCTL(KC_EQL) , KC_WH_U , LCTL(KC_MINS) , KC_NO ,
-    KC_LSFT , KC_A , KC_S , KC_D , KC_F , /* | */ KC_MUTE , KC_WH_L      , KC_WH_D , KC_WH_R       , KC_NO ,
-    KC_LCTL , KC_Z , KC_X , KC_C , KC_V , /* | */ KC_VOLD , KC_MPRV      , KC_MPLY , KC_MNXT       , KC_NO ,
+    KC_LSFT , KC_A , KC_S , KC_D , KC_F , /* | */ KC_MUTE , KC_WH_L      , KC_WH_D , KC_WH_R       , KC_NO        ,
+    KC_LCTL , KC_Z , KC_X , KC_C , KC_V , /* | */ KC_VOLD , KC_MPRV      , KC_MPLY , KC_MNXT       , KC_NO        ,
     // --------------------------------------+--------------------------------------------------------------
                         KC_ESC , KC_SPC , /* | */ KC_NO , TO(BASE_LAYER)
     // --------------------------------------+--------------------------------------------------------------
   ),
-  [GAME_LAYER] = LAYOUT(
+  [FXN_LAYER] = LAYOUT(
     // ------------------------------------------+--------------------------------------------------------------
     KC_NO , KC_NO , KC_NO , KC_F11 , KC_F12 , /* | */ KC_NO , KC_NO   , KC_NO , KC_NO , KC_NO   ,
     KC_F1 , KC_F2 , KC_F3 , KC_F4  , KC_F5  , /* | */ KC_NO , KC_LALT , KC_NO , KC_NO , KC_NO   ,
