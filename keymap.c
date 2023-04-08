@@ -253,11 +253,6 @@ td_state_t get_semicolon_fxn_state(tap_dance_state_t *state) {
 void semicolon_finished(tap_dance_state_t *state, void* user_data) {
     tap_state.state = get_semicolon_fxn_state(state);
     switch (tap_state.state) {
-        case TD_TAPPED: 
-          for (int i = 0; i < state->count; ++i){
-            register_code(KC_SCLN); 
-            unregister_code(KC_SCLN); 
-          } break;
         case TD_HELD: layer_on(FXN_LAYER); break;
         default: break;
     }
@@ -265,7 +260,6 @@ void semicolon_finished(tap_dance_state_t *state, void* user_data) {
 
 void semicolon_reset(tap_dance_state_t * state, void* user_data) {
     switch (tap_state.state) {
-        case TD_TAPPED: unregister_code(KC_SCLN); break;
         case TD_HELD: layer_off(FXN_LAYER); break;
         default: break;
     }
@@ -292,6 +286,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         action = (tap_dance_action_t * )&tap_dance_actions[TD_INDEX(keycode)];
         if (!record->event.pressed && action->state.count && !action->state.finished) {
           tap_code16(KC_Q);
+        }
+        return true;
+        break;
+      case  TD(SCLN_FXN):
+        action = (tap_dance_action_t * )&tap_dance_actions[TD_INDEX(keycode)];
+        if (!record->event.pressed && action->state.count && !action->state.finished) {
+          tap_code16(KC_SCLN);
         }
         return true;
         break;
