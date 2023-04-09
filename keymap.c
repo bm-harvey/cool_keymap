@@ -94,7 +94,9 @@ enum {
     SCLN_FXN
 };
 enum custom_keys {
-  ARROW = SAFE_RANGE,
+    ARROW = SAFE_RANGE,
+    DT_UP_1,
+    DT_DOWN_1,
 };
 
 // For the q tap dance. Put it here so it can be used in any keymap
@@ -185,9 +187,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [MACRO_LAYER] = LAYOUT(
     // -------------------------------------------------+-------------------------------------------------------------
-    KC_NO , TO(GAME_LAYER) , KC_NO , KC_NO , KC_NO , /* | */ KC_VOLU , LCTL(KC_EQL) , KC_WH_U , LCTL(KC_MINS) , KC_NO,
-    KC_NO , KC_NO          , ARROW , KC_NO , KC_NO , /* | */ KC_MUTE , KC_WH_L      , KC_WH_D , KC_WH_R       , KC_NO,
-    KC_NO , KC_NO          , KC_NO , KC_NO , KC_NO , /* | */ KC_VOLD , KC_MPRV      , KC_MPLY , KC_MNXT       , KC_NO,
+    KC_NO , TO(GAME_LAYER) , KC_NO , KC_NO , KC_NO , /* | */ KC_VOLU , LCTL(KC_EQL) , KC_WH_U , LCTL(KC_MINS) , DT_UP_1   ,
+    KC_NO , KC_NO          , ARROW , KC_NO , KC_NO , /* | */ KC_MUTE , KC_WH_L      , KC_WH_D , KC_WH_R       , DT_PRNT   ,
+    KC_NO , KC_NO          , KC_NO , KC_NO , KC_NO , /* | */ KC_VOLD , KC_MPRV      , KC_MPLY , KC_MNXT       , DT_DOWN_1 ,
     // -------------------------------------------------+-------------------------------------------------------------
                                    KC_ESC , KC_SPC , /* | */ KC_NO , TO(BASE_LAYER)
     // -------------------------------------------------+-------------------------------------------------------------
@@ -297,6 +299,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           }
         }
         return true;
+
+      case DT_DOWN_1:
+        if (record->event.pressed){
+          g_tapping_term -= 1;
+        }
+        return 1;
+      case DT_UP_1:
+        if (record->event.pressed){
+          g_tapping_term += 1;
+        }
+        return 1;
     }
     return 1;
 }
