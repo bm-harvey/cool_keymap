@@ -220,8 +220,8 @@ static td_tap_t tap_state = {
 };
 
 td_state_t get_q_macro_state(tap_dance_state_t *state) {
-    if (state->count == 1) {
-        if (state->interrupted || !state->pressed) return TD_TAPPED;
+    if (state->count) {
+        if (state->interrupted) return TD_HELD; // prefer hold behaviour for interrupt
         else return TD_HELD;
     } else return TD_UNKNOWN;
 }
@@ -243,9 +243,7 @@ void q_reset(tap_dance_state_t * state, void* user_data) {
 }
 td_state_t get_semicolon_fxn_state(tap_dance_state_t *state) {
     if (state->count) {
-        // or-ing this condition with `state->interuptted` 
-        // makes it so that the tap behaviour is preffered for rolls 
-        if (!state->pressed) return TD_TAPPED; // prefer hold behavoir on interrupt
+        if (state->interrupted) return TD_TAPPED; // prefer tap behaviour on interrupt
         else return TD_HELD;
     } else return TD_UNKNOWN;
 }
@@ -254,6 +252,7 @@ void semicolon_finished(tap_dance_state_t *state, void* user_data) {
     tap_state.state = get_semicolon_fxn_state(state);
     switch (tap_state.state) {
         case TD_HELD: layer_on(FXN_LAYER); break;
+        case TD_TAPPED: if (state->interrupted) {tap_code16(KC_SCLN);}break; // interrupted case not handled in process_record_user
         default: break;
     }
 }
@@ -282,20 +281,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           unregister_code(KC_LSFT);
           return false;
         }
+
       case  TD(Q_MACRO):
         action = (tap_dance_action_t * )&tap_dance_actions[TD_INDEX(keycode)];
-        if (!record->event.pressed && action->state.count && !action->state.finished) {
+        if ((!record->event.pressed && action->state.count && !action->state.finished)) {
           tap_code16(KC_Q);
         }
         return true;
-        break;
+
       case  TD(SCLN_FXN):
         action = (tap_dance_action_t * )&tap_dance_actions[TD_INDEX(keycode)];
         if (!record->event.pressed && action->state.count && !action->state.finished) {
           tap_code16(KC_SCLN);
         }
         return true;
-        break;
     }
     return 1;
 }
