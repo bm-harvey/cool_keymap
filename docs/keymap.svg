@@ -231,7 +231,8 @@ path {
 <rect rx="6.0" ry="6.0" x="242.0" y="889.6" width="66.0" height="66.0" class=""/>
 <text x="275.0" y="922.6" class="tap">alt</text>
 <rect rx="6.0" ry="6.0" x="312.0" y="899.4" width="66.0" height="66.0" class=""/>
-<text x="345.0" y="932.4" class="tap">win</text>
+<text x="345.0" y="932.4" class="tap">esc</text>
+<text x="345.0" y="963.4" class="hold">win</text>
 <rect rx="6.0" ry="6.0" x="522.0" y="899.4" width="66.0" height="66.0" class=""/>
 <text x="555.0" y="932.4" class="tap">del</text>
 <rect rx="6.0" ry="6.0" x="592.0" y="889.6" width="66.0" height="66.0" class=""/>

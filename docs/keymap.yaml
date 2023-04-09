@@ -25,7 +25,7 @@ layers:
   - [N, M, '<', '>', ENTER]
   - [layer, space, ctrl, {layer shift, type : held}]
   Sybols/Nav:
-  - [{tap: q , hold: MACRO}, shift, ctrl, alt, win]
+  - [{tap: q , hold: MACRO}, shift, ctrl, alt, {tap: esc, hold: win}]
   - [del, '`', up, "'", bspc]
   - ['1', '2', '3', '4', '5']
   - [\, left, down, right, {tap: ';', hold: fxn}]
