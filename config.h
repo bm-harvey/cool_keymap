@@ -1,6 +1,6 @@
 #pragma once
 
-#define TAPPING_TERM 150
+#define TAPPING_TERM 160
 #define IGNORE_MOD_TAP_INTERRUPT
 
 #define TRI_LAYER_UPPER_LAYER  1
