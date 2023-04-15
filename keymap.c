@@ -95,8 +95,6 @@ enum {
 };
 enum custom_keys {
     ARROW = SAFE_RANGE,
-    DT_UP_1,
-    DT_DOWN_1,
 };
 
 // For the q tap dance. Put it here so it can be used in any keymap
@@ -299,17 +297,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           }
         }
         return true;
-
-      case DT_DOWN_1:
-        if (record->event.pressed){
-          g_tapping_term -= 1;
-        }
-        return 1;
-      case DT_UP_1:
-        if (record->event.pressed){
-          g_tapping_term += 1;
-        }
-        return 1;
     }
     return 1;
 }
