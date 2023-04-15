@@ -498,8 +498,6 @@ path {
 <text x="625.0" y="2546.6" class="tap">
 <tspan x="625.0" dy="-0.6em">ctrl</tspan><tspan x="625.0" dy="1.2em">=</tspan></text>
 <rect rx="6.0" ry="6.0" x="662.0" y="2494.0" width="66.0" height="66.0" class=""/>
-<text x="695.0" y="2527.0" class="tap">
-<tspan x="695.0" dy="-0.6em">scroll</tspan><tspan x="695.0" dy="1.2em">up</tspan></text>
 <rect rx="6.0" ry="6.0" x="732.0" y="2515.7" width="66.0" height="66.0" class=""/>
 <text x="765.0" y="2548.7" class="tap">
 <tspan x="765.0" dy="-0.6em">ctrl</tspan><tspan x="765.0" dy="1.2em">-</tspan></text>
@@ -517,14 +515,9 @@ path {
 <rect rx="6.0" ry="6.0" x="522.0" y="2593.4" width="66.0" height="66.0" class=""/>
 <text x="555.0" y="2626.4" class="tap">mute</text>
 <rect rx="6.0" ry="6.0" x="592.0" y="2583.6" width="66.0" height="66.0" class=""/>
-<text x="625.0" y="2616.6" class="tap">
-<tspan x="625.0" dy="-0.6em">scroll</tspan><tspan x="625.0" dy="1.2em">left</tspan></text>
 <rect rx="6.0" ry="6.0" x="662.0" y="2564.0" width="66.0" height="66.0" class=""/>
-<text x="695.0" y="2597.0" class="tap">
-<tspan x="695.0" dy="-0.6em">scroll</tspan><tspan x="695.0" dy="1.2em">down</tspan></text>
+<text x="695.0" y="2597.0" class="tap">-&gt;</text>
 <rect rx="6.0" ry="6.0" x="732.0" y="2585.7" width="66.0" height="66.0" class=""/>
-<text x="765.0" y="2618.7" class="tap">
-<tspan x="765.0" dy="-0.6em">scroll</tspan><tspan x="765.0" dy="1.2em">right</tspan></text>
 <rect rx="6.0" ry="6.0" x="802.0" y="2629.1" width="66.0" height="66.0" class=""/>
 <rect rx="6.0" ry="6.0" x="32.0" y="2699.1" width="66.0" height="66.0" class=""/>
 <text x="65.0" y="2732.1" class="tap">ctrl</text>

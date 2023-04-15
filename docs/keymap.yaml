@@ -62,9 +62,9 @@ layers:
   - [{layer, type : held}, '', '', '']
   Game:
   - [tab, q, w, e, r]
-  - [vol up, ctrl =, scroll up, ctrl -, '']
+  - [vol up, ctrl =, '', ctrl -, '']
   - [shift, a, s, d, f]
-  - [mute, scroll left, scroll down, scroll right, '']
+  - [mute, '','->', '', '']
   - [ctrl, z, x, c, v]
   - [vol down, prev, pause, next, '']
   - [escape, space, '', To(Base)]
