@@ -27,9 +27,9 @@
  * [SHIFTED_LAYER]                                                        | [MACRO_LAYER]                                                           
  * TAB means shift+tab and ENT meand shift+enter                          |                                                                         
  * .-----------------------------.       .-----------------------------.  |  .-----------------------------.       .-----------------------------.  
- * | TAB |  W  |  E  |  R  |  T  |       |  Y  |  U  |  I  |  O  | bsp |  |  |     | game|     |     |     |       | volu|zmout| scup| zmin|     |  
+ * | TAB |  W  |  E  |  R  |  T  |       |  Y  |  U  |  I  |  O  | bsp |  |  |     | game|     |     |     |       | volu|zmout|     | zmin|     |  
  * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|  
- * |  A  |  S  |  D  |  F  |  G  |       |  H  |  J  |  K  |  L  |  P  |  |  |     |     |  -> |     |     |       | mute|sclft| scdn|scrht|     |  
+ * |  A  |  S  |  D  |  F  |  G  |       |  H  |  J  |  K  |  L  |  P  |  |  |     |     |  -> |     |     |       | mute|     |  -> |     |     |  
  * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|  
  * |  Z  |  X  |  C  |  V  |  B  |       |  N  |  M  |  <  |  >  | ENT |  |  |     |     |     |     |     |       | vold| prev|  pse| next|     |  
  * '-----------------------------'       '-----------------------------'  |  '-----------------------------'       '-----------------------------'  
@@ -187,9 +187,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [MACRO_LAYER] = LAYOUT(
     // -------------------------------------------------+-------------------------------------------------------------
-    KC_NO , TO(GAME_LAYER) , KC_NO , KC_NO , KC_NO , /* | */ KC_VOLU , LCTL(KC_EQL) , KC_WH_U , LCTL(KC_MINS) , DT_UP_1   ,
-    KC_NO , KC_NO          , ARROW , KC_NO , KC_NO , /* | */ KC_MUTE , KC_WH_L      , KC_WH_D , KC_WH_R       , DT_PRNT   ,
-    KC_NO , KC_NO          , KC_NO , KC_NO , KC_NO , /* | */ KC_VOLD , KC_MPRV      , KC_MPLY , KC_MNXT       , DT_DOWN_1 ,
+    KC_NO , TO(GAME_LAYER) , KC_NO , KC_NO , KC_NO , /* | */ KC_VOLU , LCTL(KC_EQL) , KC_NO   , LCTL(KC_MINS) , KC_NO ,
+    KC_NO , KC_NO          , ARROW , KC_NO , KC_NO , /* | */ KC_MUTE , KC_NO        , ARROW   , KC_NO         , KC_NO ,
+    KC_NO , KC_NO          , KC_NO , KC_NO , KC_NO , /* | */ KC_VOLD , KC_MPRV      , KC_MPLY , KC_MNXT       , KC_NO ,
     // -------------------------------------------------+-------------------------------------------------------------
                                    KC_ESC , KC_SPC , /* | */ KC_NO , TO(BASE_LAYER)
     // -------------------------------------------------+-------------------------------------------------------------
