@@ -225,9 +225,11 @@ path {
 <text x="65.0" y="968.1" class="tap">q</text>
 <text x="65.0" y="999.1" class="hold">MACRO</text>
 <rect rx="6.0" ry="6.0" x="102.0" y="891.7" width="66.0" height="66.0" class=""/>
-<text x="135.0" y="924.7" class="tap">shift</text>
+<text x="135.0" y="924.7" class="tap">.</text>
+<text x="135.0" y="955.7" class="hold">shift</text>
 <rect rx="6.0" ry="6.0" x="172.0" y="870.0" width="66.0" height="66.0" class=""/>
-<text x="205.0" y="903.0" class="tap">ctrl</text>
+<text x="205.0" y="903.0" class="tap">,</text>
+<text x="205.0" y="934.0" class="hold">ctrl</text>
 <rect rx="6.0" ry="6.0" x="242.0" y="889.6" width="66.0" height="66.0" class=""/>
 <text x="275.0" y="922.6" class="tap">alt</text>
 <rect rx="6.0" ry="6.0" x="312.0" y="899.4" width="66.0" height="66.0" class=""/>

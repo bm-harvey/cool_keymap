@@ -1,7 +1,7 @@
-/* 
+/*
  * Overview of the layout
  * \n just means enter
- * 
+ *
  * layer takes you to the numbers and nav layer (2)
  * shift isn't actually a shift but goes to a layer that sends the
     shifted version of the base layer
@@ -9,50 +9,50 @@
  * when "shift" and "layer" are held, a symbols and modified nav layer is
     available (think of it as a layer shift, not a key shift)
  * q and ; are on the num layer because tab, backspace, and enter are
-    more important 
+    more important
 
- * [BASE_LAYER]                                                           |  [SYMBOL_LAYER]                                                         
- * .-----------------------------.       .-----------------------------.  |  .-----------------------------.       .-----------------------------.  
- * | tab |  w  |  e  |  r  |  t  |       |  y  |  u  |  i  |  o  | bsp |  |  |  Q  |  %  |  ^  |  &  | esc |       | del |  ~  | pgup|  "  | bsp |  
- * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|  
- * |  a  |  s  |  d  |  f  |  g  |       |  h  |  j  |  k  |  l  |  p  |  |  |  /  |  *  |  -  |  +  |  =  |       |  |  | home| pgdn| end |  :  |  
- * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|  
- * |z ctl|x alt|c win|  v  |  b  |       |  n  |  m  |, win|. alt|\n sh|  |  |  !  |  @  |  #  |  $  |  _  |       |  [  |  ]  |  {  |  }  |  ?  |  
- * '-----------------------------'       '-----------------------------'  |  '-----------------------------'       '-----------------------------'  
- *             .─────────.                       .─────────.              |              .─────────.                       .─────────.              
- *             |  layer  |─────────.   .─────────| *shift* |              |              |~~layer~~|─────────.   .─────────|~~shift~~|              
- *             '─────────|  space  |   |   ctrl  |─────────'              |              '─────────|  space  |   |   ctrl  |─────────'              
- *                       '─────────'   '─────────'                        |                        '─────────'   '─────────'                        
- *                                                                        |                                                                         
- * [SHIFTED_LAYER]                                                        | [MACRO_LAYER]                                                           
- * TAB means shift+tab and ENT meand shift+enter                          |                                                                         
- * .-----------------------------.       .-----------------------------.  |  .-----------------------------.       .-----------------------------.  
- * | TAB |  W  |  E  |  R  |  T  |       |  Y  |  U  |  I  |  O  | bsp |  |  |     | game|     |     |     |       | volu|zmout|     | zmin|     |  
- * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|  
- * |  A  |  S  |  D  |  F  |  G  |       |  H  |  J  |  K  |  L  |  P  |  |  |     |     |  -> |     |     |       | mute|     |  -> |     |     |  
- * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|  
- * |  Z  |  X  |  C  |  V  |  B  |       |  N  |  M  |  <  |  >  | ENT |  |  |     |     |     |     |     |       | vold| prev|  pse| next|     |  
- * '-----------------------------'       '-----------------------------'  |  '-----------------------------'       '-----------------------------'  
- *             .─────────.                       .─────────.              |              .─────────.                       .─────────.              
- *             |  layer  |─────────.   .─────────|~~shift~~|              |              |  escape |─────────.   .─────────|   base  |              
- *             '─────────|  space  |   |   ctrl  |─────────'              |              '─────────|  space  |   |         |─────────'              
- *                       '─────────'   '─────────'                        |                        '─────────'   '─────────'                        
- *                                                                        |                                                                         
- * [NUM_LAYER]                                                            |  [GAME_LAYER]                                                           
- * holding q opens a macro layer                                          |                                                                         
- * holding ; opens a fxn layer                                            |                                                                         
- * .-----------------------------.       .-----------------------------.  |  .-----------------------------.       .-----------------------------.  
- * |q mac| sft | ctl | alt | win |       | del |  `  |  up |  '  | bsp |  |  | tab |  q  |  w  |  e  |  r  |       | volu|zmout| scup| zmin|     |  
- * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|  
- * |  1  |  2  |  3  |  4  |  5  |       |  \  | lft |  dn | rht |; fxn|  |  | sft |  a  |  s  |  d  |  f  |       | mute|sclft| scdn|scrht|     |  
- * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|  
- * |  6  |  7  |  8  |  9  |  0  |       |  _  |  /  |  (  |  )  |\n sh|  |  | ctl |  z  |  x  |  c  |  v  |       | vold| prev|pause| next|  ~  |  
- * '-----------------------------'       '-----------------------------'  |  '-----------------------------'       '-----------------------------'  
- *             .─────────.                       .─────────.              |              .─────────.                       .─────────.              
- *             |~~layer~~|─────────.   .─────────| *shift* |              |              |  escape |─────────.   .─────────|   base  |              
- *             '─────────|  space  |   |   ctrl  |─────────'              |              '─────────|  space  |   |         |─────────'              
- *                       '─────────'   '─────────'                        |                        '─────────'   '─────────'                        
-                                                                          |                                                                         
+ * [BASE_LAYER]                                                           |  [SYMBOL_LAYER]
+ * .-----------------------------.       .-----------------------------.  |  .-----------------------------.       .-----------------------------.
+ * | tab |  w  |  e  |  r  |  t  |       |  y  |  u  |  i  |  o  | bsp |  |  |  Q  |  %  |  ^  |  &  | esc |       | del |  ~  | pgup|  "  | bsp |
+ * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|
+ * |  a  |  s  |  d  |  f  |  g  |       |  h  |  j  |  k  |  l  |  p  |  |  |  /  |  *  |  -  |  +  |  =  |       |  |  | home| pgdn| end |  :  |
+ * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|
+ * |z ctl|x alt|c win|  v  |  b  |       |  n  |  m  |, win|. alt|\n sh|  |  |  !  |  @  |  #  |  $  |  _  |       |  [  |  ]  |  {  |  }  |  ?  |
+ * '-----------------------------'       '-----------------------------'  |  '-----------------------------'       '-----------------------------'
+ *             .─────────.                       .─────────.              |              .─────────.                       .─────────.
+ *             |  layer  |─────────.   .─────────| *shift* |              |              |~~layer~~|─────────.   .─────────|~~shift~~|
+ *             '─────────|  space  |   |   ctrl  |─────────'              |              '─────────|  space  |   |   ctrl  |─────────'
+ *                       '─────────'   '─────────'                        |                        '─────────'   '─────────'
+ *                                                                        |
+ * [SHIFTED_LAYER]                                                        | [MACRO_LAYER]
+ * TAB means shift+tab and ENT meand shift+enter                          |
+ * .-----------------------------.       .-----------------------------.  |  .-----------------------------.       .-----------------------------.
+ * | TAB |  W  |  E  |  R  |  T  |       |  Y  |  U  |  I  |  O  | bsp |  |  |     | game|     |     |     |       | volu|zmout|     | zmin|     |
+ * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|
+ * |  A  |  S  |  D  |  F  |  G  |       |  H  |  J  |  K  |  L  |  P  |  |  |     |     |  -> |     |     |       | mute|     |  -> |     |     |
+ * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|
+ * |  Z  |  X  |  C  |  V  |  B  |       |  N  |  M  |  <  |  >  | ENT |  |  |     |     |     |     |     |       | vold| prev|  pse| next|     |
+ * '-----------------------------'       '-----------------------------'  |  '-----------------------------'       '-----------------------------'
+ *             .─────────.                       .─────────.              |              .─────────.                       .─────────.
+ *             |  layer  |─────────.   .─────────|~~shift~~|              |              |  escape |─────────.   .─────────|   base  |
+ *             '─────────|  space  |   |   ctrl  |─────────'              |              '─────────|  space  |   |         |─────────'
+ *                       '─────────'   '─────────'                        |                        '─────────'   '─────────'
+ *                                                                        |
+ * [NUM_LAYER]                                                            |  [GAME_LAYER]
+ * holding q opens a macro layer                                          |
+ * holding ; opens a fxn layer                                            |
+ * .-----------------------------.       .-----------------------------.  |  .-----------------------------.       .-----------------------------.
+ * |q mac| sft | ctl | alt | win |       | del |  `  |  up |  '  | bsp |  |  | tab |  q  |  w  |  e  |  r  |       | volu|zmout| scup| zmin|     |
+ * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|
+ * |  1  |  2  |  3  |  4  |  5  |       |  \  | lft |  dn | rht |; fxn|  |  | sft |  a  |  s  |  d  |  f  |       | mute|sclft| scdn|scrht|     |
+ * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|
+ * |  6  |  7  |  8  |  9  |  0  |       |  _  |  /  |  (  |  )  |\n sh|  |  | ctl |  z  |  x  |  c  |  v  |       | vold| prev|pause| next|  ~  |
+ * '-----------------------------'       '-----------------------------'  |  '-----------------------------'       '-----------------------------'
+ *             .─────────.                       .─────────.              |              .─────────.                       .─────────.
+ *             |~~layer~~|─────────.   .─────────| *shift* |              |              |  escape |─────────.   .─────────|   base  |
+ *             '─────────|  space  |   |   ctrl  |─────────'              |              '─────────|  space  |   |         |─────────'
+ *                       '─────────'   '─────────'                        |                        '─────────'   '─────────'
+                                                                          |
  * [FXN_LAYER]                                                            |
  * .-----------------------------.       .-----------------------------.  |
  * |     |     |     | F11 | F12 |       |     |     |     |     |     |  |
@@ -70,54 +70,49 @@
 
 #include QMK_KEYBOARD_H
 
-
-char * layout_string = "test\n";
+char *layout_string = "test\n";
 
 // tap dance states
-typedef enum {
-    TD_NONE,
-    TD_UNKNOWN,
-    TD_HELD,
-    TD_TAPPED
-} td_state_t;
+typedef enum { TD_NONE, TD_UNKNOWN, TD_HELD, TD_TAPPED } td_state_t;
 
 // used for tapdance
 typedef struct {
-    bool is_press_action;
+    bool       is_press_action;
     td_state_t state;
 } td_tap_t;
 
+// const uint16_t PROGMEM backspace_combo[] = {KC_J, KC_K, COMBO_END};
+// const uint16_t PROGMEM delete_combo[] = {KC_J, KC_K, COMBO_END};
+
+// combo_t key_combos[COMBO_COUNT] = {COMBO(backspace_combo, KC_BSPC)};
 
 // Tap dance keycodes ... use with TD()
-enum {
-    Q_MACRO,
-    SCLN_FXN
-};
+enum { Q_MACRO, SCLN_FXN };
 enum custom_keys {
     ARROW = SAFE_RANGE,
+    TO_GAME,
+    TO_BASE,
 };
 
 // For the q tap dance. Put it here so it can be used in any keymap
 td_state_t get_q_macro_state(tap_dance_state_t *state);
-void q_finished(tap_dance_state_t * state, void *user_data);
-void q_reset(tap_dance_state_t * state, void *user_data);
-
+void       q_finished(tap_dance_state_t *state, void *user_data);
+void       q_reset(tap_dance_state_t *state, void *user_data);
 
 td_state_t get_semicolon_fxn_state(tap_dance_state_t *state);
-void semicolon_finished(tap_dance_state_t * state, void *user_data);
-void semicolon_reset(tap_dance_state_t * state, void *user_data);
+void       semicolon_finished(tap_dance_state_t *state, void *user_data);
+void       semicolon_reset(tap_dance_state_t *state, void *user_data);
 
 tap_dance_action_t tap_dance_actions[];
 
-
 enum layer_names {
-  BASE_LAYER,
-  SHIFTED_LAYER,
-  NUM_LAYER,
-  SYMBOL_LAYER,
-  MACRO_LAYER,
-  GAME_LAYER,
-  FXN_LAYER,
+    BASE_LAYER,
+    SHIFTED_LAYER,
+    NUM_LAYER,
+    SYMBOL_LAYER,
+    MACRO_LAYER,
+    GAME_LAYER,
+    FXN_LAYER,
 };
 
 // #define COLEMACKDH
@@ -166,13 +161,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 #endif
   [NUM_LAYER] = LAYOUT(
-    // --------------------------------------------------------------+------------------------------------------------------------------------
-     TD(Q_MACRO) , KC_LSFT , KC_LCTL , KC_LALT , LGUI_T(KC_ESC) , /* | */ KC_DEL        , KC_GRV  , KC_UP      , KC_QUOT    , KC_BSPC        ,
-     KC_1        , KC_2    , KC_3    , KC_4    , KC_5           , /* | */ KC_BSLS       , KC_LEFT , KC_DOWN    , KC_RIGHT   , TD(SCLN_FXN)   ,
-     KC_6        , KC_7    , KC_8    , KC_9    , KC_0           , /* | */ LSFT(KC_MINS) , KC_SLSH , LSFT(KC_9) , LSFT(KC_0) , LSFT_T(KC_ENT) ,
-    // --------------------------------------------------------------+------------------------------------------------------------------------
-                                     QK_TRI_LAYER_LOWER, KC_SPC , /* | */ KC_LCTL , QK_TRI_LAYER_UPPER
-    // --------------------------------------------------------------+------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------+------------------------------------------------------------------------
+     TD(Q_MACRO) , LSFT_T(KC_DOT) , LCTL_T(KC_COMM) , KC_LALT , LGUI_T(KC_ESC) , /* | */ KC_DEL        , KC_GRV  , KC_UP      , KC_QUOT    , KC_BSPC        ,
+     KC_1        , KC_2           , KC_3            , KC_4    , KC_5           , /* | */ KC_BSLS       , KC_LEFT , KC_DOWN    , KC_RIGHT   , TD(SCLN_FXN)   ,
+     KC_6        , KC_7           , KC_8            , KC_9    , KC_0           , /* | */ LSFT(KC_MINS) , KC_SLSH , LSFT(KC_9) , LSFT(KC_0) , LSFT_T(KC_ENT) ,
+    // -----------------------------------------------------------------------------+------------------------------------------------------------------------
+                                                    QK_TRI_LAYER_LOWER, KC_SPC , /* | */ KC_LCTL , QK_TRI_LAYER_UPPER
+    // -----------------------------------------------------------------------------+------------------------------------------------------------------------
   ),
   [SYMBOL_LAYER] = LAYOUT(
     // -------------------------------------------------------------------------+----------------------------------------------------------------------------------
@@ -289,7 +284,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return true;
 
-      case  TD(SCLN_FXN):
+      case TD(SCLN_FXN):
         action = (tap_dance_action_t * )&tap_dance_actions[TD_INDEX(keycode)];
         if (!record->event.pressed && action->state.count && !action->state.finished ) {
           if (!action->state.interrupted){
@@ -297,6 +292,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           }
         }
         return true;
+
     }
     return 1;
 }
