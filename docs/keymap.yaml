@@ -46,9 +46,9 @@ layers:
   - [{layer, type : held}, space, ctrl, {layer shift, type: held}]
   Macro:
   - [{'', type : ghost}, To(Game), '', '', '']
-  - [vol up, ctrl =, scroll up, ctrl -, '']
+  - [vol up, ctrl =, '', ctrl -, '']
   - ['', '', ->, '', '']
-  - [mute, scroll left, scroll down, scroll right, '']
+  - [mute, '', '->', '', '']
   - ['', '', '', '', '']
   - [vol down, prev, pause, next, '']
   - [{layer, type : held}, space, '', '']
@@ -62,9 +62,9 @@ layers:
   - [{layer, type : held}, '', '', '']
   Game:
   - [tab, q, w, e, r]
-  - [vol up, ctrl =, '', ctrl -, '']
+  - [vol up, ctrl =, scroll up, ctrl -, '']
   - [shift, a, s, d, f]
-  - [mute, '','->', '', '']
+  - [mute, scroll left,scroll down, scrol right, '']
   - [ctrl, z, x, c, v]
   - [vol down, prev, pause, next, '']
   - [escape, space, '', To(Base)]
