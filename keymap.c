@@ -13,7 +13,7 @@
 
  * [BASE_LAYER]                                                           |  [SYMBOL_LAYER]
  * .-----------------------------.       .-----------------------------.  |  .-----------------------------.       .-----------------------------.
- * | tab |  w  |  e  |  r  |  t  |       |  y  |  u  |  i  |  o  | bsp |  |  |  Q  |  %  |  ^  |  &  | esc |       | del |  ~  | pgup|  "  | bsp |
+ * |  q  |  w  |  e  |  r  |  t  |       |  y  |  u  |  i  |  o  | bsp |  |  |  Q  |  %  |  ^  |  &  | esc |       | del |  ~  | pgup|  "  | bsp |
  * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|
  * |  a  |  s  |  d  |  f  |  g  |       |  h  |  j  |  k  |  l  |  p  |  |  |  /  |  *  |  -  |  +  |  =  |       |  |  | home| pgdn| end |  :  |
  * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|
@@ -27,7 +27,7 @@
  * [SHIFTED_LAYER]                                                        | [MACRO_LAYER]
  * TAB means shift+tab and ENT meand shift+enter                          |
  * .-----------------------------.       .-----------------------------.  |  .-----------------------------.       .-----------------------------.
- * | TAB |  W  |  E  |  R  |  T  |       |  Y  |  U  |  I  |  O  | bsp |  |  |     | game|     |     |     |       | volu|zmout|     | zmin|     |
+ * |  Q  |  W  |  E  |  R  |  T  |       |  Y  |  U  |  I  |  O  | bsp |  |  |     | game|     |     |     |       | volu|zmout|     | zmin|     |
  * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|
  * |  A  |  S  |  D  |  F  |  G  |       |  H  |  J  |  K  |  L  |  P  |  |  |     |     |  -> |     |     |       | mute|     |  -> |     |     |
  * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|
@@ -42,7 +42,7 @@
  * holding q opens a macro layer                                          |
  * holding ; opens a fxn layer                                            |
  * .-----------------------------.       .-----------------------------.  |  .-----------------------------.       .-----------------------------.
- * |q mac| sft | ctl | alt | win |       | del |  `  |  up |  '  | bsp |  |  | tab |  q  |  w  |  e  |  r  |       | volu|zmout| scup| zmin|     |
+ * |macro| sft | ctl | alt | win |       | del |  `  |  up |  '  | bsp |  |  | tab |  q  |  w  |  e  |  r  |       | volu|zmout| scup| zmin|     |
  * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|
  * |  1  |  2  |  3  |  4  |  5  |       |  \  | lft |  dn | rht |; fxn|  |  | sft |  a  |  s  |  d  |  f  |       | mute|sclft| scdn|scrht|     |
  * |-----------------------------|       |-----------------------------|  |  |-----------------------------|       |-----------------------------|
@@ -87,11 +87,13 @@ typedef struct {
 // combo_t key_combos[COMBO_COUNT] = {COMBO(backspace_combo, KC_BSPC)};
 
 // Tap dance keycodes ... use with TD()
-enum { Q_MACRO, SCLN_FXN };
+enum { Q_MACRO, SCLN_FXN, LOWER_TAB };
 enum custom_keys {
     ARROW = SAFE_RANGE,
+    IMPLIES,
     TO_GAME,
     TO_BASE,
+    RAISE,
 };
 
 // For the q tap dance. Put it here so it can be used in any keymap
@@ -102,6 +104,14 @@ void       q_reset(tap_dance_state_t *state, void *user_data);
 td_state_t get_semicolon_fxn_state(tap_dance_state_t *state);
 void       semicolon_finished(tap_dance_state_t *state, void *user_data);
 void       semicolon_reset(tap_dance_state_t *state, void *user_data);
+
+td_state_t get_lower_state(tap_dance_state_t *state);
+void       lower_finished(tap_dance_state_t *state, void *user_data);
+void       lower_reset(tap_dance_state_t *state, void *user_data);
+
+td_state_t get_raise_state(tap_dance_state_t *state);
+void       raise_finished(tap_dance_state_t *state, void *user_data);
+void       raise_reset(tap_dance_state_t *state, void *user_data);
 
 tap_dance_action_t tap_dance_actions[];
 
@@ -124,20 +134,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef QWERTY
   [BASE_LAYER] = LAYOUT(
     // -------------------------------------------------------------+-----------------------------------------------------------------------
-    KC_TAB         , KC_W         , KC_E         , KC_R , KC_T , /* | */ KC_Y  , KC_U , KC_I            , KC_O           , KC_BSPC         ,
+    KC_Q           , KC_W         , KC_E         , KC_R , KC_T , /* | */ KC_Y  , KC_U , KC_I            , KC_O           , KC_BSPC         ,
     KC_A           , KC_S         , KC_D         , KC_F , KC_G , /* | */ KC_H  , KC_J , KC_K            , KC_L           , KC_P            ,
-    LCTL_T(KC_Z)   , LALT_T(KC_X) , LGUI_T(KC_C) , KC_V , KC_B , /* | */ KC_N  , KC_M , LGUI_T(KC_COMM) , LALT_T(KC_DOT) , LSFT_T(KC_ENT)  ,
+    LCTL_T(KC_Z)   , KC_X         , KC_C         , KC_V , KC_B , /* | */ KC_N  , KC_M , LGUI_T(KC_COMM) , LALT_T(KC_DOT) , LSFT_T(KC_ENT)  ,
     // -------------------------------------------------------------+-----------------------------------------------------------------------
-                                   QK_TRI_LAYER_LOWER , KC_SPC , /* | */ KC_LCTL , QK_TRI_LAYER_UPPER
+                                      TD(LOWER_TAB)   , KC_SPC , /* | */ KC_LCTL , RAISE
     // -------------------------------------------------------------+------------------------------------------------------------------------
   ),
   [SHIFTED_LAYER] = LAYOUT(
     // -------------------------------------------------------------------+---------------------------------------------------------------------------
-    LSFT(KC_TAB) , LSFT(KC_W) , LSFT(KC_E) , LSFT(KC_R) , LSFT(KC_T) , /* | */ LSFT(KC_Y) , LSFT(KC_U) , LSFT(KC_I)    , LSFT(KC_O)   , KC_BSPC      ,
+    LSFT(KC_Q)   , LSFT(KC_W) , LSFT(KC_E) , LSFT(KC_R) , LSFT(KC_T) , /* | */ LSFT(KC_Y) , LSFT(KC_U) , LSFT(KC_I)    , LSFT(KC_O)   , KC_BSPC      ,
     LSFT(KC_A)   , LSFT(KC_S) , LSFT(KC_D) , LSFT(KC_F) , LSFT(KC_G) , /* | */ LSFT(KC_H) , LSFT(KC_J) , LSFT(KC_K)    , LSFT(KC_L)   , LSFT(KC_P)   ,
     LSFT(KC_Z)   , LSFT(KC_X) , LSFT(KC_C) , LSFT(KC_V) , LSFT(KC_B) , /* | */ LSFT(KC_N) , LSFT(KC_M) , LSFT(KC_COMM) , LSFT(KC_DOT) , LSFT(KC_ENT) ,
     // -------------------------------------------------------------------+---------------------------------------------------------------------------
-                                         QK_TRI_LAYER_LOWER , KC_SPC , /* | */ KC_LCTL , QK_TRI_LAYER_UPPER
+                                                       TD(LOWER_TAB), KC_SPC , /* | */ KC_LCTL , RAISE
     // -------------------------------------------------------------------+---------------------------------------------------------------------------
   ),
 #elif defined COLEMACKDH
@@ -162,11 +172,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #endif
   [NUM_LAYER] = LAYOUT(
     // -----------------------------------------------------------------------------+------------------------------------------------------------------------
-     TD(Q_MACRO) , LSFT_T(KC_DOT) , LCTL_T(KC_COMM) , KC_LALT , LGUI_T(KC_ESC) , /* | */ KC_DEL        , KC_GRV  , KC_UP      , KC_QUOT    , KC_BSPC        ,
-     KC_1        , KC_2           , KC_3            , KC_4    , KC_5           , /* | */ KC_BSLS       , KC_LEFT , KC_DOWN    , KC_RIGHT   , TD(SCLN_FXN)   ,
-     KC_6        , KC_7           , KC_8            , KC_9    , KC_0           , /* | */ LSFT(KC_MINS) , KC_SLSH , LSFT(KC_9) , LSFT(KC_0) , LSFT_T(KC_ENT) ,
+     TO(MACRO_LAYER) , KC_LSFT , LCTL_T(KC_DOT) , LALT_T(KC_COMM) , LGUI_T(KC_ESC)         , /* | */ KC_DEL        , KC_GRV  , KC_UP      , KC_QUOT    , KC_BSPC        ,
+     KC_1            , KC_2           , KC_3            , KC_4    , KC_5           , /* | */ KC_BSLS       , KC_LEFT , KC_DOWN    , KC_RIGHT   , TD(SCLN_FXN)   ,
+     KC_6            , KC_7           , KC_8            , KC_9    , KC_0           , /* | */ LSFT(KC_MINS) , KC_SLSH , LSFT(KC_9) , LSFT(KC_0) , LSFT_T(KC_ENT) ,
     // -----------------------------------------------------------------------------+------------------------------------------------------------------------
-                                                    QK_TRI_LAYER_LOWER, KC_SPC , /* | */ KC_LCTL , QK_TRI_LAYER_UPPER
+                                                       TD(LOWER_TAB), KC_SPC , /* | */ KC_LCTL , RAISE
     // -----------------------------------------------------------------------------+------------------------------------------------------------------------
   ),
   [SYMBOL_LAYER] = LAYOUT(
@@ -175,39 +185,39 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_SLSH    , LSFT(KC_8) , KC_MINS      , LSFT(KC_EQL) , KC_EQL        , /* | */ LSFT(KC_BSLS) , KC_HOME      , KC_PGDN       , KC_END        , LSFT(KC_SCLN) ,
      LSFT(KC_1) , LSFT(KC_2) , LSFT(KC_3)   , LSFT(KC_4)   , LSFT(KC_MINS) , /* | */ KC_LBRC       , KC_RBRC      , LSFT(KC_LBRC) , LSFT(KC_RBRC) , LSFT(KC_SLSH) ,
     // -------------------------------------------------------------------------+----------------------------------------------------------------------------------
-                                               QK_TRI_LAYER_LOWER , KC_SPC , /* | */ KC_LCTL , QK_TRI_LAYER_UPPER
+                                                       TD(LOWER_TAB), KC_SPC , /* | */ KC_LCTL , RAISE
     // -------------------------------------------------------------------------+----------------------------------------------------------------------------------
   ),
   [MACRO_LAYER] = LAYOUT(
     // -------------------------------------------------+-------------------------------------------------------------
-    KC_NO , TO(GAME_LAYER) , KC_NO , KC_NO , KC_NO , /* | */ KC_VOLU , LCTL(KC_EQL) , KC_NO   , LCTL(KC_MINS) , KC_NO ,
-    KC_NO , KC_NO          , ARROW , KC_NO , KC_NO , /* | */ KC_MUTE , KC_NO        , ARROW   , KC_NO         , KC_NO ,
+    KC_NO , TO(GAME_LAYER) , KC_NO , KC_NO , KC_NO , /* | */ KC_VOLU , LCTL(KC_EQL) , IMPLIES , LCTL(KC_MINS) , KC_NO ,
+    KC_NO , KC_NO          , ARROW , KC_NO , KC_NO , /* | */ KC_MUTE , LCTL(LBRC)   , ARROW   , RCTL(RBRC)    , KC_NO ,
     KC_NO , KC_NO          , KC_NO , KC_NO , KC_NO , /* | */ KC_VOLD , KC_MPRV      , KC_MPLY , KC_MNXT       , KC_NO ,
     // -------------------------------------------------+-------------------------------------------------------------
                                    KC_ESC , KC_SPC , /* | */ KC_NO , TO(BASE_LAYER)
     // -------------------------------------------------+-------------------------------------------------------------
-  ), 
+  ),
   [GAME_LAYER] = LAYOUT(
     // --------------------------------------+--------------------------------------------------------------
-    KC_TAB  , KC_Q , KC_W , KC_E , KC_R , /* | */ KC_VOLU , LCTL(KC_EQL) , KC_WH_U , LCTL(KC_MINS) , KC_NO ,
-    KC_LSFT , KC_A , KC_S , KC_D , KC_F , /* | */ KC_MUTE , KC_WH_L      , KC_WH_D , KC_WH_R       , KC_NO ,
-    KC_LCTL , KC_Z , KC_X , KC_C , KC_V , /* | */ KC_VOLD , KC_MPRV      , KC_MPLY , KC_MNXT       , KC_NO ,
+    KC_TAB  , KC_Q , KC_W , KC_E , KC_R , /* | */ KC_VOLU , KC_NO        , KC_NO   , KC_NO   , KC_NO ,
+    KC_LSFT , KC_A , KC_S , KC_D , KC_F , /* | */ KC_MUTE , KC_NO        , KC_NO   , KC_NO   , KC_NO ,
+    KC_LCTL , KC_Z , KC_X , KC_C , KC_V , /* | */ KC_VOLD , KC_MPRV      , KC_MPLY , KC_MNXT , KC_NO ,
     // --------------------------------------+--------------------------------------------------------------
                         KC_ESC , KC_SPC , /* | */ KC_NO , TO(BASE_LAYER)
     // --------------------------------------+--------------------------------------------------------------
   ),
   [FXN_LAYER] = LAYOUT(
     // ------------------------------------------+--------------------------------------------------------------
-    KC_NO , KC_NO , KC_NO , KC_F11 , KC_F12 , /* | */ KC_NO , KC_NO         , KC_NO   , KC_NO         , KC_NO ,
-    KC_F1 , KC_F2 , KC_F3 , KC_F4  , KC_F5  , /* | */ KC_NO , LCTL(KC_LBRC) , KC_LALT , LCTL(KC_RBRC) , KC_NO ,
-    KC_F6 , KC_F7 , KC_F8 , KC_F9  , KC_F10 , /* | */ KC_NO , KC_NO         , KC_NO   , KC_NO         , KC_NO ,
+    KC_NO , KC_NO , KC_NO , KC_F11 , KC_F12 , /* | */ KC_NO , KC_NO , KC_NO   , KC_NO , KC_NO ,
+    KC_F1 , KC_F2 , KC_F3 , KC_F4  , KC_F5  , /* | */ KC_NO , KC_NO , KC_LALT , KC_NO , KC_NO ,
+    KC_F6 , KC_F7 , KC_F8 , KC_F9  , KC_F10 , /* | */ KC_NO , KC_NO , KC_NO   , KC_NO , KC_NO ,
     // ------------------------------------------+--------------------------------------------------------------
                               KC_NO , KC_NO , /* | */ KC_NO , TO(BASE_LAYER)
     // ------------------------------------------+--------------------------------------------------------------
   ),
 };
 
-// 
+//
 // Create an instance of 'td_tap_t' for the 'q' tap dance.
 static td_tap_t tap_state = {
     .is_press_action = true,
@@ -236,12 +246,35 @@ void q_reset(tap_dance_state_t * state, void* user_data) {
     }
     tap_state.state = TD_NONE;
 }
+
+td_state_t get_lower_state(tap_dance_state_t *state) {
+    if (state->count) {
+        if (state->interrupted) return TD_HELD; // prefer hold behaviour for interrupt
+        else return TD_HELD;
+    } else return TD_UNKNOWN;
+}
+void lower_finished(tap_dance_state_t *state, void* user_data) {
+    tap_state.state = get_lower_state(state);
+    switch (tap_state.state) {
+        case TD_HELD: layer_on(NUM_LAYER); update_tri_layer(NUM_LAYER, SHIFTED_LAYER, SYMBOL_LAYER); break;
+        case TD_TAPPED: break; // interrupted case not handled in process_record_user
+        default: break;
+    }
+}
+void lower_reset(tap_dance_state_t * state, void* user_data) {
+    switch (tap_state.state) {
+        case TD_HELD: layer_off(NUM_LAYER); update_tri_layer(NUM_LAYER, SHIFTED_LAYER, SYMBOL_LAYER); break;
+        default: break;
+    }
+    tap_state.state = TD_NONE;
+}
 td_state_t get_semicolon_fxn_state(tap_dance_state_t *state) {
     if (state->count) {
         if (state->pressed && state->interrupted) return TD_TAPPED; // prefer tap behaviour on interrupt
         else return TD_HELD;
     } else return TD_UNKNOWN;
 }
+
 
 void semicolon_finished(tap_dance_state_t *state, void* user_data) {
     tap_state.state = get_semicolon_fxn_state(state);
@@ -251,7 +284,6 @@ void semicolon_finished(tap_dance_state_t *state, void* user_data) {
         default: break;
     }
 }
-
 void semicolon_reset(tap_dance_state_t * state, void* user_data) {
     switch (tap_state.state) {
         case TD_HELD: layer_off(FXN_LAYER); break;
@@ -260,8 +292,11 @@ void semicolon_reset(tap_dance_state_t * state, void* user_data) {
     tap_state.state = TD_NONE;
 }
 
+
+
 tap_dance_action_t tap_dance_actions[] = {
     [Q_MACRO] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, q_finished, q_reset),
+    [LOWER_TAB] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, lower_finished, lower_reset),
     [SCLN_FXN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, semicolon_finished, semicolon_reset)
 };
 
@@ -271,6 +306,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case ARROW:
         if (record->event.pressed){
           tap_code16(KC_MINS);
+          register_code(KC_LSFT);
+          tap_code16(KC_DOT);
+          unregister_code(KC_LSFT);
+          return false;
+        }
+      case IMPLIES:
+        if (record->event.pressed){
+          tap_code16(KC_EQL);
           register_code(KC_LSFT);
           tap_code16(KC_DOT);
           unregister_code(KC_LSFT);
@@ -291,6 +334,29 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             tap_code16(KC_SCLN);
           }
         }
+        return true;
+
+      case RAISE:
+        if (record->event.pressed){
+            layer_on(SHIFTED_LAYER);
+        } else {
+            layer_off(SHIFTED_LAYER);
+        }
+        update_tri_layer(NUM_LAYER, SHIFTED_LAYER, SYMBOL_LAYER);
+        return true;
+
+      case TD(LOWER_TAB):
+        action = (tap_dance_action_t * )&tap_dance_actions[TD_INDEX(keycode)];
+        if (!record->event.pressed && action->state.count && !action->state.finished ) {
+            if (layer_state_is(SHIFTED_LAYER)){
+                register_code(KC_LSFT);
+            }
+            tap_code16(KC_TAB);
+            if (layer_state_is(SHIFTED_LAYER)){
+                unregister_code(KC_LSFT);
+            }
+        }
+        update_tri_layer(NUM_LAYER, SHIFTED_LAYER, SYMBOL_LAYER);
         return true;
 
     }
